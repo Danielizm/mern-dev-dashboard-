@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
-const dataRoutes = require('./routes/dataRoutes');
+//const dataRoutes = require('./routes/dataRoutes');
 
 // Load environment variables
 dotenv.config();
@@ -23,7 +23,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // Routes
 app.use('/api/auth', authRoutes);  // Authentication routes
-app.use('/api/data', dataRoutes);  // Data routes for admin dashboard
+//app.use('/api/data', dataRoutes);  // Data routes for admin dashboard
 
 // Start the server
 const PORT = process.env.PORT || 5000;
