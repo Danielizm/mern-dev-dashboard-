@@ -6,10 +6,10 @@ import {
 } from './actions';
 
 // API calls
-const loginApi = (credentials) => axios.post('/api/auth/login', credentials);
+const loginApi = (credentials) => axios.post('http://localhost:5001/api/auth/login', credentials);
 const fetchDataApi = () => {
   const token = localStorage.getItem('token');
-  return axios.get('/api/data', {
+  return axios.get('http://localhost:5001//api/data', {
     headers: { Authorization: `Bearer ${token}` }
   });
 };
