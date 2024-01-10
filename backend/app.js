@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const dataRoutes = require('./routes/dataRoutes');
 
@@ -10,9 +11,6 @@ dotenv.config();
 // Initialize the app
 const app = express();
 
-// Middleware to parse JSON
-app.use(express.json());
-
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -20,6 +18,16 @@ mongoose.connect(process.env.MONGO_URI, {
 })
 .then(() => console.log('MongoDB connected'))
 .catch((error) => console.error('MongoDB connection failed:', error));
+
+// Middleware to parse JSON
+app.use(express.json());
+
+// Configure CORS to allow requests from the frontend
+app.use(cors({
+  origin: 'http://localhost:3000',  // Allow frontend to make requests to this backend
+  methods: ['GET', 'POST'],  // Specify allowed methods
+  credentials: true          // Allow cookies to be sent (if needed for auth)
+}));
 
 // Routes
 app.use('/api/auth', authRoutes);  // Authentication routes
