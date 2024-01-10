@@ -23,8 +23,15 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use(express.json());
 
 // Configure CORS to allow requests from the frontend
+const allowedOrigins = ['https://your-frontend.com', 'http://localhost:3000'];
 app.use(cors({
-  origin: 'http://localhost:3000',  // Allow frontend to make requests to this backend
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },  // Allow frontend to make requests to this backend
   methods: ['GET', 'POST'],  // Specify allowed methods
   credentials: true          // Allow cookies to be sent (if needed for auth)
 }));
