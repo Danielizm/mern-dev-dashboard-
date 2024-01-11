@@ -1,23 +1,14 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import axios from 'axios';
+import { loginAPI, fetchDataAPI } from '../services/api';
 import {
   LOGIN_REQUEST, loginSuccess, loginFailure,
   FETCH_DATA_REQUEST, fetchDataSuccess, fetchDataFailure
 } from './actions';
 
-// API calls
-const loginApi = (credentials) => axios.post('http://localhost:5001/api/auth/login', credentials,{ withCredentials: true });
-const fetchDataApi = () => {
-  const token = localStorage.getItem('token');
-  return axios.get('http://localhost:5001//api/data', {
-    headers: { Authorization: `Bearer ${token}` }
-  });
-};
-
 // Worker saga: handle login
 function* handleLogin(action) {
   try {
-    const response = yield call(loginApi, action.payload);
+    const response = yield call(loginAPI, action.payload);
     const token = response.data.token;
     localStorage.setItem('token', token);
     yield put(loginSuccess(token));
@@ -29,7 +20,7 @@ function* handleLogin(action) {
 // Worker saga: handle data fetching
 function* handleFetchData() {
   try {
-    const response = yield call(fetchDataApi);
+    const response = yield call(fetchDataAPI);
     yield put(fetchDataSuccess(response.data));
   } catch (error) {
     yield put(fetchDataFailure(error.response.data.message));

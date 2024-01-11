@@ -9,6 +9,6 @@ const api = axios.create({
 });
 
 // Export API routes
-export const login = (credentials) => api.post('/auth/login', credentials);
-export const fetchData = (token) =>
+export const loginAPI = (credentials) => api.post('/auth/login', credentials);
+export const fetchDataAPI = (token) =>
   api.get('/data', { headers: { Authorization: `Bearer ${token}` } });
