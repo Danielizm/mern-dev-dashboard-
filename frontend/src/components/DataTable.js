@@ -15,8 +15,8 @@ const DataTable = ({ data }) => {
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+            {headerGroup.headers.map((column,index) => (
+              <th key={'th-'+index} {...column.getHeaderProps()}>{column.render('Header')}</th>
             ))}
           </tr>
         ))}
@@ -26,8 +26,8 @@ const DataTable = ({ data }) => {
           prepareRow(row);
           return (
             <tr {...row.getRowProps()}>
-              {row.cells.map(cell => (
-                <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+              {row.cells.map((cell,index) => (
+                <td key={'td-'+index} {...cell.getCellProps()}>{cell.render('Cell')}</td>
               ))}
             </tr>
           );

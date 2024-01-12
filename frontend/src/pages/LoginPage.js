@@ -3,16 +3,14 @@ import { Navigate } from 'react-router-dom';
 import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
-  let isLogin = localStorage.getItem('token')?true:false;
-  if(isLogin){
-    return (<Navigate to='/dashboard' />)
-  }else{
-    return 
-    (<div>
+  const isLogin = localStorage.getItem('token')?true:false;
+    return isLogin ? (<Navigate to='/dashboard' />) :
+    (
+    <div>
       <h1>Login</h1>
       <LoginForm />
-    </div>)
-  }
+    </div>
+    )
 };
 
 export default LoginPage;

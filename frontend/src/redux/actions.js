@@ -12,6 +12,7 @@ export const loginRequest = (credentials) => ({ type: LOGIN_REQUEST, payload: cr
 export const loginSuccess = (token) => ({ type: LOGIN_SUCCESS, payload: token });
 export const loginFailure = (error) => ({ type: LOGIN_FAILURE, payload: error });
 
+
 // Data fetching actions
 export const fetchDataRequest = () => ({ type: FETCH_DATA_REQUEST });
 export const fetchDataSuccess = (data) => ({ type: FETCH_DATA_SUCCESS, payload: data });

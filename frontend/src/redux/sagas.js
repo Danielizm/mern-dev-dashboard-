@@ -20,7 +20,7 @@ function* handleLogin(action) {
 // Worker saga: handle data fetching
 function* handleFetchData() {
   try {
-    const response = yield call(fetchDataAPI);
+    const response = yield call(fetchDataAPI, localStorage.getItem('token'));
     yield put(fetchDataSuccess(response.data));
   } catch (error) {
     yield put(fetchDataFailure(error.response.data.message));
