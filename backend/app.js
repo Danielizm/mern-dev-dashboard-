@@ -32,7 +32,7 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },  // Allow frontend to make requests to this backend
-  methods: ['GET', 'POST'],  // Specify allowed methods
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Specify allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'],  // Allow headers needed for auth
   credentials: true          // Allow cookies to be sent (if needed for auth)
 }));
