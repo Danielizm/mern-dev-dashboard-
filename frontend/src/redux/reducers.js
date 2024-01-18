@@ -22,7 +22,7 @@ const authReducer = (state = { token: null, loading: false, error: null }, actio
 };
 
 // Data fetching reducer
-const dataReducer = (state = { data: [], loading: false, error: null }, action) => {
+const dataReducer = (state = { data: [], error: null }, action) => {
   switch (action.type) {
     case FETCH_DATA_REQUEST:
       return { ...state, loading: true, error: null };
@@ -39,28 +39,27 @@ const dataReducer = (state = { data: [], loading: false, error: null }, action) 
       return { ...state, loading: false, error: action.payload };
       // Update item cases
     case UPDATE_ITEM_REQUEST:
-      return { ...state, loading: true };
+      return { ...state,loading:true };
     case UPDATE_ITEM_SUCCESS:
       return {
         ...state,
-        loading: false,
+        loading:false,
         data: state.data.map(item => item._id === action.payload._id ? action.payload : item)  // Replace updated item
       };
     case UPDATE_ITEM_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading:false, error: action.payload };
     default:
       return state;
       // Delete item cases
     case DELETE_ITEM_REQUEST:
-      return { ...state, loading: true };
+      return { ...state};
     case DELETE_ITEM_SUCCESS:
       return {
         ...state,
-        loading: false,
         data: state.data.filter(item => item._id !== action.payload)  // Remove deleted item from list
       };
     case DELETE_ITEM_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, error: action.payload };
   }
 };
 
